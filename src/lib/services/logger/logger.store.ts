@@ -16,4 +16,4 @@ export interface LogEntry {
 	error?: Error;
 }
 
-export const settings = store([] as LogEntry[]);
+export const applog = store([] as LogEntry[]);

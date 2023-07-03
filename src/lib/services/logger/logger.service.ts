@@ -1,6 +1,6 @@
 import { ServiceMixin } from '../service';
 import { settings } from '../settings';
-import { MessageType, type LogEntry } from './log.store';
+import { MessageType, type LogEntry, applog } from './logger.store';
 
 export class Logger extends ServiceMixin<Logger>() {
 	/**
@@ -93,11 +93,12 @@ export class Logger extends ServiceMixin<Logger>() {
 		error?: Error;
 	}) {
 		const logEntry: LogEntry = { ...newLogEntry, date: new Date() };
+		applog.merge([logEntry]);
 		return logEntry;
 	}
 
 	private get isDebugMode() {
-		return settings.get().debug;
+		return settings.value.debug;
 	}
 }
 /**
