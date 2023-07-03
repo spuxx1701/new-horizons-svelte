@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { Service } from './service';
+import { ServiceMixin } from './service';
 
 describe('Utilities', () => {
 	describe('Service', () => {
 		it('should properly instantiate the service', () => {
-			const service = Service.instance;
-			expect(service).toBeInstanceOf(Service);
-			expect(service).toBe((Service as unknown as { _instance: Service })._instance);
+			class TestService extends ServiceMixin<TestService>() {}
+
+			const instance = TestService.instance;
+			expect(instance).toBeDefined();
+			expect(instance).toBe((TestService as unknown as { _instance: TestService })._instance);
 		});
 	});
 });

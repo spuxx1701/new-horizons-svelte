@@ -1,11 +1,15 @@
 <script>
-	import CardGrid from './index/CardGrid.svelte';
-	import Card from './index/Card.svelte';
-	import { Settings } from '$lib/services/settings';
-
-	const settings = Settings.instance;
+	import CardGrid from './index/card-grid.svelte';
+	import Card from './index/card.svelte';
+	import { SettingsService, settings } from '$lib/services/settings';
+	import { Theme } from '$lib/config/theme.config';
+	import { Renderer } from '$lib/services/renderer/renderer.service';
 
 	function test() {
+		const rand = Math.round(Math.random());
+		settings.merge({ theme: rand });
+		SettingsService.instance.save();
+		Renderer.instance.applyTheme(settings.get().theme);
 	}
 </script>
 
@@ -56,4 +60,4 @@
 
 <button title="test" on:click={test}>test</button>
 
-{settings.$userSettings}
+{$settings.theme}
