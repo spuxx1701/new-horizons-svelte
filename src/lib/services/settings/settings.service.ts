@@ -24,7 +24,7 @@ export class SettingsService extends ServiceMixin<SettingsService>() {
 	 * Saves the current settings to `localStorage`.
 	 */
 	save() {
-		const json = JSON.stringify(this.settings.get());
+		const json = JSON.stringify(this.settings.value);
 		localStorage.setItem(LOCAL_STORAGE_KEY, json);
 		debug(`Settings saved: ${json}`, SettingsService.name);
 	}

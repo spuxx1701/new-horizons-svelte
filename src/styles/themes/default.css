@@ -1,13 +1,13 @@
 .theme-default body {
-	background-color: black;
+	background-color: #0d0f10;
 }
 
 .theme-default * {
 	--color-branding-bar: #00ffff;
-	--color-header-background: rgb(25, 25, 25);
-	--color-sidebar-background: rgb(25, 25, 25);
+	--color-header-background: #1c1c1c;
+	--color-sidebar-background: #1c1c1c;
 
-	--color-container-background: rgba(15, 15, 15, 0.95);
+	--color-container-background: #25292b;
 
 	--color-control-disabled: rgba(35, 35, 35, 0.7);
 	--color-control-inactive: black;

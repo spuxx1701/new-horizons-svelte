@@ -1,6 +1,10 @@
 hr {
-  border-radius: 50%;
-  height: 2px;
-  border: none;
-  background-color: var(--color-text-default);
+	border-radius: 50%;
+	height: 2px;
+	border: none;
+	background-color: var(--color-text-default);
+}
+
+a {
+	text-decoration: none;
 }

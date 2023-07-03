@@ -22,11 +22,16 @@
 		z-index: 1;
 		text-align: center;
 		color: var(--color-text-default);
+		text-decoration: none;
 		border-width: initial;
 		border-style: none;
 		border-color: initial;
 		border-image: initial;
 		border-radius: 5px;
 		padding: 1rem;
+	}
+
+	a:hover {
+		scale: 1.05;
 	}
 </style>
