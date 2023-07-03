@@ -1,13 +1,11 @@
 import { get, writable, type Writable } from 'svelte/store';
 
-type StorableType = object | string | number | boolean;
-
 /**
  * `Store` extends `svelte/store/Writable` and offers additional
  * functionality like resetting the value to its initial value, parsing
  * the value or merging a new value.
  */
-export interface Store<T = StorableType> extends Writable<T> {
+export interface Store<T> extends Writable<T> {
 	/**
 	 * The initial value of the writable.
 	 */
@@ -17,11 +15,6 @@ export interface Store<T = StorableType> extends Writable<T> {
 	 * @returns
 	 */
 	get value(): T;
-	/**
-	 * Returns the value of the store.
-	 * @returns
-	 */
-	get: () => T;
 	/**
 	 * Merges the given `newValue` into the store's current value.
 	 * @param newValue
@@ -38,32 +31,31 @@ export interface Store<T = StorableType> extends Writable<T> {
  * @param initialValue
  * @returns
  */
-export function store<T = StorableType>(initialValue: T) {
-	const { subscribe, set, update } = writable(
-		typeof initialValue === 'object' ? ({ ...initialValue } as T) : initialValue
-	);
+export function store<T>(initialValue: T) {
+	const { subscribe, set, update } = writable(initialValue);
 
 	const newStore: Store<T> = {
 		initialValue,
 		get value(): T {
 			return get(this);
 		},
-		get(): T {
-			return get(this);
-		},
 		merge(newValue: Partial<T> | T) {
-			if (typeof newValue === 'object') {
-				update((value) => {
-					return { ...value, ...newValue };
+			if (Array.isArray(newValue)) {
+				update((value: any) => {
+					return [...value, ...newValue] as T;
 				});
 			} else {
-				set(newValue);
+				if (typeof newValue === 'object') {
+					update((value) => {
+						return { ...value, ...newValue };
+					});
+				} else {
+					set(newValue);
+				}
 			}
 		},
 		reset() {
-			set(
-				typeof this.initialValue === 'object' ? ({ ...this.initialValue } as T) : this.initialValue
-			);
+			set(this.initialValue);
 		},
 		subscribe,
 		set,
