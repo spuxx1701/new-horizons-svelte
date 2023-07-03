@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"start": "vite dev",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -15,6 +16,7 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
+		"@iconify/svelte": "^3.1.4",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
